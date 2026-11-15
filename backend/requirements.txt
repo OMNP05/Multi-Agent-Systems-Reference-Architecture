@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+httpx
+python-dotenv
+pydantic>=2
+langgraph
+langchain-core
+langchain-openai
+langchain-anthropic
+langchain-google-genai
+grandalf
