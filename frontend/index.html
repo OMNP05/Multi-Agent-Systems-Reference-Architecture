@@ -230,7 +230,6 @@
           <div><label for="n_ret">Data retention and audit logs</label><input id="n_ret" data-req="0" placeholder="e.g. audit logs kept 1 year"></div>
         </div>
         <div class="row mt">
-          <div><label for="n_budget">Monthly budget limit</label><input id="n_budget" data-req="0" placeholder="e.g. USD 5,000 per month"></div>
           <div><label for="n_scale">Scaling needs</label><input id="n_scale" data-req="0" placeholder="e.g. autoscale, 3x peak at month end"></div>
         </div>
         <label for="n_other" style="margin-top:16px">Other requirements <span class="small">(anything unusual or specific to you that is not covered above: integrations, operating hours, special events, restrictions)</span></label>
@@ -438,7 +437,7 @@ const NFR_FIELDS = [
   ["n_peak", "Peak concurrent users"], ["n_avg", "Average load"], ["n_avail", "Availability target (%)"],
   ["n_lat", "Response latency"], ["n_rpo", "RPO (data loss allowed)"], ["n_rto", "RTO (time to recover)"],
   ["n_res", "Data residency"], ["n_dr", "Backup / DR region"], ["n_sec", "Security and compliance"],
-  ["n_ret", "Data retention and audit logs"], ["n_budget", "Monthly budget limit"], ["n_scale", "Scaling needs"],
+  ["n_ret", "Data retention and audit logs"], ["n_scale", "Scaling needs"],
   ["n_other", "Other requirements"],
 ];
 const nfrText = () => NFR_FIELDS.map(([id, l]) => [l, $(id).value.trim()]).filter(x => x[1]).map(x => `${x[0]}: ${x[1]}`).join("\n");
