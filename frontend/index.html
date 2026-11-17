@@ -8,7 +8,16 @@
   :root {
     --bg:#f8f9fa; --card:#fff; --line:#dadce0; --text:#202124; --muted:#5f6368;
     --blue:#1a73e8; --blue-d:#1765cc; --blue-l:#e8f0fe; --red:#d93025; --green:#188038;
+    --in:#fff; --hover:#f8fbff; --tgl:#bdc1c6; --shadow:rgba(60,64,67,.18); --warn:#b06000;
+    color-scheme: light;
   }
+  [data-theme="dark"] {
+    --bg:#0f1115; --card:#171a21; --line:#2b303b; --text:#e8eaed; --muted:#9aa0a6;
+    --blue:#6ea8fe; --blue-d:#8ab4f8; --blue-l:#1f2a3d; --red:#f28b82; --green:#81c995;
+    --in:#0d0f14; --hover:#1c212b; --tgl:#4a4f5a; --shadow:rgba(0,0,0,.6); --warn:#fdd663;
+    color-scheme: dark;
+  }
+  [data-theme="dark"] button.primary { color:#0f1115; }
   * { box-sizing: border-box; }
   body { margin:0; padding:0 16px 56px; background:var(--bg); color:var(--text);
          font:14px/1.5 "Google Sans",Roboto,"Segoe UI",Arial,sans-serif; }
@@ -24,18 +33,18 @@
   .body { padding:20px; }
   label { display:block; color:var(--muted); font-size:12px; margin-bottom:6px; }
   input, select, textarea { width:100%; padding:9px 12px; border:1px solid var(--line); border-radius:8px; font:inherit;
-                            color:var(--text); background:#fff; transition:border-color .15s, box-shadow .15s; }
+                            color:var(--text); background:var(--in); transition:border-color .15s, box-shadow .15s; }
   input:focus, select:focus, textarea:focus { outline:none; border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-l); }
   input:disabled { background:var(--bg); color:var(--muted); }
   textarea { min-height:120px; resize:vertical; }
   .dd { position:relative; }
   .dd-btn { width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; padding:9px 12px;
-            background:#fff; color:var(--text); font-weight:400; text-align:left; }
+            background:var(--in); color:var(--text); font-weight:400; text-align:left; }
   .dd-btn svg { flex:none; color:var(--muted); transition:transform .15s; }
   .dd-btn[aria-expanded="true"] { border-color:var(--blue); box-shadow:0 0 0 3px var(--blue-l); }
   .dd-btn[aria-expanded="true"] svg { transform:rotate(180deg); color:var(--blue); }
   .dd-list { position:absolute; z-index:10; top:calc(100% + 6px); left:0; min-width:100%; margin:0; padding:6px; list-style:none;
-             background:#fff; border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px rgba(60,64,67,.18); }
+             background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:0 8px 24px var(--shadow); }
   .dd-list li { padding:9px 12px; border-radius:8px; cursor:pointer; white-space:nowrap; display:flex; align-items:center; justify-content:space-between; gap:12px; }
   .dd-list li:hover, .dd-list li:focus { background:var(--blue-l); outline:none; }
   .dd-list li[aria-selected="true"] { color:var(--blue); font-weight:500; }
@@ -50,7 +59,7 @@
          background:none; border-radius:50%; color:var(--muted); display:flex; align-items:center; justify-content:center; }
   .eye:hover { background:var(--blue-l); color:var(--blue); }
   .eye svg { width:20px; height:20px; }
-  button { padding:9px 18px; border:1px solid var(--line); background:#fff; color:var(--blue); border-radius:8px;
+  button { padding:9px 18px; border:1px solid var(--line); background:var(--in); color:var(--blue); border-radius:8px;
            cursor:pointer; font:inherit; font-weight:500; }
   button:hover:not(:disabled) { background:var(--blue-l); }
   button.primary { background:var(--blue); border-color:var(--blue); color:#fff; }
@@ -64,13 +73,13 @@
   th, td { padding:12px 20px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
   th { color:var(--muted); font-weight:500; font-size:12px; white-space:nowrap; background:var(--bg); }
   td.num, th.num { text-align:right; white-space:nowrap; }
-  tbody tr:hover { background:#f8fbff; }
+  tbody tr:hover { background:var(--hover); }
   .small { color:var(--muted); font-size:12px; }
   tfoot td { font-weight:500; background:var(--bg); border-bottom:0; }
   .list { margin:0; padding-left:20px; } .list li { margin:3px 0; }
   .chips { display:flex; gap:8px; flex-wrap:wrap; } .chip { background:var(--blue-l); color:var(--blue-d); padding:4px 12px; border-radius:16px; font-size:13px; }
   td.q, th.q { text-align:right; width:64px; padding-left:8px; padding-right:8px; white-space:nowrap; }
-  .src-live { color:var(--green); } .src-static { color:#b06000; }
+  .src-live { color:var(--green); } .src-static { color:var(--warn); }
   .tabs { display:flex; gap:6px; padding:0 20px; border-bottom:1px solid var(--line); }
   .tab { border:0; border-bottom:2px solid transparent; border-radius:0; background:none; color:var(--muted); padding:12px 16px; }
   .tab:hover:not(:disabled) { background:none; color:var(--blue); }
@@ -86,32 +95,62 @@
   .lnk:hover:not(:disabled) { background:var(--blue-l); }
   .lnk.on { background:var(--blue-l); color:var(--blue-d); font-weight:500; }
   .lnk .c { font-size:12px; color:var(--muted); background:var(--bg); border-radius:10px; padding:0 8px; min-width:22px; text-align:center; }
-  .lnk.on .c { background:#fff; color:var(--blue-d); }
+  .lnk.on .c { background:var(--card); color:var(--blue-d); }
   .lnk.zero { color:var(--muted); opacity:.65; }
   .main { flex:1 1 auto; min-width:0; }
   .lay-h { padding:14px 20px 10px; background:var(--blue-l); border-bottom:1px solid var(--line); }
   .lay-h b { font-weight:500; } .lay-h .small { margin-top:2px; }
-  .sec { display:inline-block; font-size:10px; letter-spacing:.06em; background:#fff; color:var(--blue-d); border:1px solid var(--line); border-radius:10px; padding:0 8px; margin-right:6px; vertical-align:middle; }
+  .sec { display:inline-block; font-size:10px; letter-spacing:.06em; background:var(--card); color:var(--blue-d); border:1px solid var(--line); border-radius:10px; padding:0 8px; margin-right:6px; vertical-align:middle; }
   .lay-note { padding:10px 20px; color:var(--muted); font-size:13px; border-bottom:1px solid var(--line); }
   .tgl { display:inline-flex; align-items:center; gap:10px; margin:0; cursor:pointer; color:var(--text); font-size:13px; user-select:none; }
   .tgl input { position:absolute; opacity:0; width:0; height:0; }
-  .tgl .sw { position:relative; width:36px; height:20px; border-radius:10px; background:#bdc1c6; transition:background .15s; flex:none; }
+  .tgl .sw { position:relative; width:36px; height:20px; border-radius:10px; background:var(--tgl); transition:background .15s; flex:none; }
   .tgl .sw::after { content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:transform .15s; box-shadow:0 1px 2px rgba(0,0,0,.3); }
   .tgl input:checked + .sw { background:var(--blue); }
   .tgl input:checked + .sw::after { transform:translateX(16px); }
   .tgl input:focus-visible + .sw { box-shadow:0 0 0 3px var(--blue-l); }
   .empty { padding:28px 20px; color:var(--muted); text-align:center; }
+  .top { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; }
+  .themebtn { display:flex; align-items:center; gap:8px; white-space:nowrap; margin-top:4px; }
+  .themebtn svg { width:18px; height:18px; }
+  fieldset.nfr { border:1px solid var(--line); border-radius:12px; margin:20px 0 0; padding:16px 18px 18px; }
+  fieldset.nfr legend { padding:0 8px; font-weight:500; }
+  fieldset.nfr legend .small { font-weight:400; margin-left:6px; }
+  .req { color:var(--red); }
+  input.bad, textarea.bad { border-color:var(--red); box-shadow:0 0 0 3px rgba(217,48,37,.15); }
+  .hint { color:var(--muted); font-size:12px; margin-top:4px; }
 </style>
 </head>
 <body>
 <div class="bar"></div>
 <div class="wrap">
-  <h1>GCP Enterprise Bill of Materials</h1>
-  <p class="sub">Describe the use case and non-functional requirements. The agent lists every GCP component needed, per environment, with live prices.</p>
+  <div class="top">
+    <div>
+      <h1>GCP Enterprise Bill of Materials</h1>
+      <p class="sub">Describe the use case and non-functional requirements. The agent lists every GCP component needed, per environment, with live prices.</p>
+    </div>
+    <button type="button" id="theme" class="themebtn" aria-label="Switch between light and dark theme" title="Switch theme"></button>
+  </div>
 
-  <div class="card">
-    <header><div><b>Inputs</b><span>use case and LLM settings</span></div></header>
-    <div class="body">
+  <div class="card" id="app">
+    <header>
+      <div class="actions" style="margin:0">
+        <button class="primary" id="go">Generate</button>
+        <button id="reset">Reset</button>
+        <span id="status"></span>
+      </div>
+      <button id="csv" disabled>Download CSV</button>
+    </header>
+    <div class="tabs" role="tablist">
+      <button class="tab on" data-k="inputs">1. Inputs</button>
+      <button class="tab" data-k="llm">2. LLM Setup</button>
+      <button class="tab" data-k="pipeline">3. Pipeline<span class="n" id="nPipe">0</span></button>
+      <button class="tab" data-k="bom">4. BOM<span class="n" id="nBom">0</span></button>
+      <button class="tab" data-k="boq">5. BOQ<span class="n" id="nBoq">0</span></button>
+      <button class="tab" data-k="cost">6. Cost</button>
+    </div>
+
+    <div class="body" id="pIn">
       <div class="row" style="margin-bottom:16px">
         <div><label for="region">Region</label>
           <select id="region">
@@ -165,13 +204,44 @@
         </div>
       </div>
 
-      <label for="usecase">Use case / functional requirement</label>
+      <label for="usecase">Functional requirement (FR) <span class="req">*</span> <span class="small">what the system must do</span></label>
       <textarea id="usecase" placeholder="e.g. Customer support agent that answers order-status questions from our order system, with chat on web and mobile, around 1 lakh users a day..."></textarea>
 
-      <label for="nfr" style="margin-top:16px">Non-functional requirements (availability, latency, throughput, peak, RTO/RPO, security, compliance, data residency, retention, DR)</label>
-      <textarea id="nfr" style="min-height:80px" placeholder="e.g. 99.9% availability, response under 2 s, 1 lakh users/day with 3x peak, RPO 15 min / RTO 1 h, PII must stay in India, audit logging, private networking only..."></textarea>
+      <fieldset class="nfr">
+        <legend>Non-functional requirements <span class="small">fields marked <span class="req">*</span> are required; they set quantities, tiers and the cost</span></legend>
+        <div class="row">
+          <div><label for="n_peak">Peak concurrent users <span class="req">*</span></label><input id="n_peak" data-req="1" placeholder="e.g. 800"></div>
+          <div><label for="n_avg">Average load (users or requests per hour / day) <span class="req">*</span></label><input id="n_avg" data-req="1" placeholder="e.g. 1,000 users per hour"></div>
+        </div>
+        <div class="row mt">
+          <div><label for="n_avail">Availability target (%) <span class="req">*</span></label><input id="n_avail" data-req="1" placeholder="e.g. 99.9"></div>
+          <div><label for="n_lat">Response latency <span class="req">*</span></label><input id="n_lat" data-req="1" placeholder="e.g. p95 under 5 s"></div>
+        </div>
+        <div class="row mt">
+          <div><label for="n_rpo">RPO (data you can afford to lose) <span class="req">*</span></label><input id="n_rpo" data-req="1" placeholder="e.g. 15 minutes"></div>
+          <div><label for="n_rto">RTO (time to recover) <span class="req">*</span></label><input id="n_rto" data-req="1" placeholder="e.g. 1 hour"></div>
+        </div>
+        <div class="row mt">
+          <div><label for="n_res">Data residency <span class="req">*</span></label><input id="n_res" data-req="1" placeholder="e.g. all data stays in India"></div>
+          <div><label for="n_dr">Backup / DR region</label><input id="n_dr" data-req="0" placeholder="e.g. second Indian region"></div>
+        </div>
+        <div class="row mt">
+          <div><label for="n_sec">Security and compliance <span class="req">*</span></label><input id="n_sec" data-req="1" placeholder="e.g. SOC 2, PCI DSS, private networking only"></div>
+          <div><label for="n_ret">Data retention and audit logs</label><input id="n_ret" data-req="0" placeholder="e.g. audit logs kept 1 year"></div>
+        </div>
+        <div class="row mt">
+          <div><label for="n_budget">Monthly budget limit</label><input id="n_budget" data-req="0" placeholder="e.g. USD 5,000 per month"></div>
+          <div><label for="n_scale">Scaling needs</label><input id="n_scale" data-req="0" placeholder="e.g. autoscale, 3x peak at month end"></div>
+        </div>
+        <label for="n_other" style="margin-top:16px">Other requirements <span class="small">(anything unusual or specific to you that is not covered above: integrations, operating hours, special events, restrictions)</span></label>
+        <textarea id="n_other" style="min-height:90px" placeholder="e.g. Month-end peak is 3x normal load. No public internet access to the knowledge base. Support hours are 8am-8pm IST."></textarea>
+      </fieldset>
 
-      <div class="row mt">
+      <div class="note">The design is an LLM proposal, so review it. Do not enter confidential information into a service you are not cleared to use.</div>
+    </div>
+
+    <div class="body" id="pLlm" hidden>
+      <div class="row">
         <div class="w-sel"><label id="provlabel">LLM provider</label>
           <div class="dd" id="dd">
             <input type="hidden" id="provider" value="openai_compatible">
@@ -195,13 +265,10 @@
           </div></div>
       </div>
 
-      <div class="actions">
-        <button class="primary" id="go">Design &amp; build BOM</button>
-        <button id="reset">Reset</button>
-        <span id="status"></span>
-      </div>
-      <div class="note">The API key is sent to your backend with each request and is never saved. The design is an LLM proposal, so review it. Do not enter confidential information into a service you are not cleared to use.</div>
+      <div class="note">The API key is sent to your backend with each request and is never saved. Prices come from the Cloud Billing Catalog API when GCP_PRICING_API_KEY is set on the server.</div>
     </div>
+
+    <div class="main" id="mainv" hidden></div>
   </div>
 
   <div class="card" id="pAssump" hidden>
@@ -212,22 +279,6 @@
   <div class="card" id="pExcl" hidden>
     <header><div><b>Exclusions</b><span>not included in this estimate</span></div></header>
     <div class="body"><ul class="list" id="excl"></ul></div>
-  </div>
-
-  <div class="card" id="results">
-    <header>
-      <div><b>Solution design</b><span id="sum">logical pipeline, GCP bill of materials, quantities and cost</span></div>
-      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-        <button id="csv" disabled>Download CSV</button>
-      </div>
-    </header>
-    <div class="tabs">
-      <button class="tab on" data-k="pipeline">Pipeline<span class="n" id="nPipe">0</span></button>
-      <button class="tab" data-k="bom">BOM<span class="n" id="nBom">0</span></button>
-      <button class="tab" data-k="boq">BOQ<span class="n" id="nBoq">0</span></button>
-      <button class="tab" data-k="cost">Cost</button>
-    </div>
-    <div class="main" id="mainv"></div>
   </div>
 
   <div class="card" id="pMcp" hidden>
@@ -294,7 +345,7 @@ setEye(false);
 
 const money = n => n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 const vol = n => n.toLocaleString("en-US", { maximumFractionDigits: 2 });
-let tab = "pipeline";
+let tab = "inputs";
 
 // footer label, noting rows left out of the total only when there are any
 const footLabel = (list, label) => label + (list.some(r => r.monthly_total === null) ? " (excl. services without a list price)" : "");
@@ -349,6 +400,7 @@ function costHtml(rows) {
   return table('<th>BOM component</th><th class="num">Total instances</th><th>Price (Cloud Billing Catalog API)</th><th>Formula</th><th class="num">Monthly ($)</th><th class="num">One-time build ($)</th>', body, foot, 1000);
 }
 
+const RESULT_TABS = ["pipeline", "bom", "boq", "cost"];
 function render() {
   const has = !!data;
   $("csv").disabled = !has;
@@ -360,20 +412,55 @@ function render() {
   $("mcp").innerHTML = has ? data.mcp_tools.map(t => `<span class="chip">${esc(t)}</span>`).join("") : "";
   document.querySelectorAll(".tab").forEach(t => t.classList.toggle("on", t.dataset.k === tab));
   $("nPipe").textContent = $("nBom").textContent = $("nBoq").textContent = has ? data.rows.length : 0;
-  if (!has) { $("mainv").innerHTML = '<div class="empty">No components yet.</div>'; return; }
+  const isRes = RESULT_TABS.includes(tab);
+  $("pIn").hidden = tab !== "inputs"; $("pLlm").hidden = tab !== "llm"; $("mainv").hidden = !isRes;
+  if (!isRes) return;
+  if (!has) { $("mainv").innerHTML = '<div class="empty">No components yet. Fill in Inputs and LLM Setup, then click Generate.</div>'; return; }
   $("mainv").innerHTML = { pipeline: pipelineHtml, bom: bomHtml, boq: boqHtml, cost: costHtml }[tab](ordered());
 }
 
 document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => { tab = t.dataset.k; render(); }));
 
+// Theme (light / dark), remembered in this browser only
+const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+const MOON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z"/></svg>';
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  $("theme").innerHTML = (t === "dark" ? SUN + "Light" : MOON + "Dark") + " theme";
+  try { localStorage.setItem("theme", t); } catch (e) {}
+}
+let saved = null; try { saved = localStorage.getItem("theme"); } catch (e) {}
+setTheme(saved || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"));
+$("theme").addEventListener("click", () => setTheme(document.documentElement.dataset.theme === "dark" ? "light" : "dark"));
+
+// NFR fields -> one structured text block the backend already understands
+const NFR_FIELDS = [
+  ["n_peak", "Peak concurrent users"], ["n_avg", "Average load"], ["n_avail", "Availability target (%)"],
+  ["n_lat", "Response latency"], ["n_rpo", "RPO (data loss allowed)"], ["n_rto", "RTO (time to recover)"],
+  ["n_res", "Data residency"], ["n_dr", "Backup / DR region"], ["n_sec", "Security and compliance"],
+  ["n_ret", "Data retention and audit logs"], ["n_budget", "Monthly budget limit"], ["n_scale", "Scaling needs"],
+  ["n_other", "Other requirements"],
+];
+const nfrText = () => NFR_FIELDS.map(([id, l]) => [l, $(id).value.trim()]).filter(x => x[1]).map(x => `${x[0]}: ${x[1]}`).join("\n");
+document.querySelectorAll("input,textarea").forEach(el => el.addEventListener("input", () => el.classList.remove("bad")));
+
 $("go").addEventListener("click", async () => {
+  document.querySelectorAll(".bad").forEach(x => x.classList.remove("bad"));
+  const mark = ids => ids.forEach(id => $(id).classList.add("bad"));
+  const missing = [];
+  if ($("usecase").value.trim().length < 10) missing.push("usecase");
+  document.querySelectorAll('[data-req="1"]').forEach(el => { if (!el.value.trim()) missing.push(el.id); });
+  if (missing.length) {
+    tab = "inputs"; render(); mark(missing);
+    $(missing[0]).focus();
+    return setStatus(missing.includes("usecase") && missing.length === 1 ? "Enter the functional requirement (at least a sentence)." : `Please fill the ${missing.length} required field(s) marked in red.`, "err");
+  }
   const body = {
-    use_case: $("usecase").value.trim(), nfr: $("nfr").value.trim(), provider: $("provider").value,
+    use_case: $("usecase").value.trim(), nfr: nfrText(), provider: $("provider").value,
     endpoint: $("endpoint").value.trim() || null, model: $("model").value.trim(), api_key: $("apikey").value.trim(),
     region: $("region").value || "asia-south1",
   };
-  if (body.use_case.length < 10) return setStatus("Enter the use case (at least a sentence).", "err");
-  if (!body.model || !body.api_key) return setStatus("Model and API key are required.", "err");
+  if (!body.model || !body.api_key) { tab = "llm"; render(); mark([!body.model ? "model" : "apikey"]); return setStatus("Model and API key are required (LLM Setup tab).", "err"); }
   $("go").disabled = true; setStatus("Designing the BOM and fetching live GCP prices... this can take a minute or two.");
   try {
     const res = await fetch("/api/bom", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
@@ -404,7 +491,9 @@ $("csv").addEventListener("click", () => {
 });
 
 $("reset").addEventListener("click", () => {
-  data = null; tab = "pipeline"; $("usecase").value = ""; $("nfr").value = ""; setStatus(""); render();
+  data = null; tab = "inputs"; $("usecase").value = "";
+  NFR_FIELDS.forEach(([id]) => { $(id).value = ""; });
+  document.querySelectorAll(".bad").forEach(x => x.classList.remove("bad")); setStatus(""); render();
 });
 render();
 </script>
